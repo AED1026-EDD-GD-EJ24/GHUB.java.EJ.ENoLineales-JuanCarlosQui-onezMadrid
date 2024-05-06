@@ -1,4 +1,5 @@
 package arbolBinario;
+import colas.Cola;
 import pilas.Pila;
 
 public class ArbolBinario{
@@ -119,6 +120,20 @@ public class ArbolBinario{
             aux = aux.getDerecho();
 
         }
+
+    }
+    public void recorridoPorNivel(){
+        Cola<Nodo> cola = new Cola<Nodo>();
+        cola.encolar(raiz);
+        while(!cola.estaVacia()){
+            Nodo aux = cola.frente();
+            visitar(aux);
+            
+            if(aux.getIzquierdo() != null){
+                cola.encolar(aux.getIzquierdo());
+            }
+            cola.desencolar();
+
 
     }
 
