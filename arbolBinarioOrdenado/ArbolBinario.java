@@ -138,5 +138,60 @@ public class ArbolBinario{
 
 
     }
+    // insercion de un nodo
+    private void insertar(Object valor) throws Exception{
+        Comparable dato = (Comparable)valor;
+        Nodo nuevo = new Nodo(dato);
+
+        if(raiz == null){
+            raiz = nuevo;
+        }else{
+            //hace una referencia al padre de auxiliar
+            Nodo anterior = null;
+            //Es un auxiliar que va recorriendo el nodo desde la raiz
+            Nodo aux = raiz;
+            while(aux != null){
+                anterior = aux;
+                if(dato.esMenor(aux.getValor()))){
+                    aux = aux.getIzquierdo();
+                }
+                if(dato.esMayor(aux.getValor())){
+                    aux = aux.getDerecho();
+                }else{
+                    throw new Exception("Dato duplicado");
+                }
+            }
+            if(dato.esMenor (anterior.getValor())){
+                anterior.setIzquierdo(nuevo);
+            }else{
+                anterior.setDerecho(nuevo);
+            }
+
+
+
+        }
+    }
+    //Version recursiva de insertear
+    public void insertar2(Object valor) throws Exception{
+        Comparable dato = (Comparable)valor;
+        raiz = insertaRec(raiz, dato);
+    }
+    private Nodo insertaRec(Nodo raizSub, Comparable dato) throws Exception{
+        if(raizSub == null){
+            //caso base, ternima la recursividad
+            raizSub = new Nodo(dato);
+        }else{
+            if(dato.esMenor(raizSub.getValor())){
+                raizSub.setIzquierdo(insertaRec(raizSub.getIzquierdo(), dato));
+                raizSub = setIzquierdo(iz);
+            }else{
+                if(dato.esMayor(raizSub.getValor())){
+                    Nodo 
+
+        }
+    
+    
+    }
+        
 
 }
