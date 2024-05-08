@@ -133,6 +133,7 @@ public class ArbolBinario{
                 cola.encolar(aux.getIzquierdo());
             }
             cola.desencolar();
+        }
 
 
     }
