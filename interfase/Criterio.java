@@ -1,8 +1,6 @@
 package interfase;
 
-public class Criterio {
-    // Constructor method
-    public Criterio() {
-        // Add your constructor logic here
-    }
+public abstract class Criterio<T> {
+    public abstract int comparar(T a, T b);
+
 }
