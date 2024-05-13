@@ -196,6 +196,66 @@ public class ArbolBinario{
         }
         return raizSub;
     }
+    //Elimina un Nodo del árbol
+    public boolean eliminar(Object valor){
+        Comparable dato = (Comparable)valor;
+        //Buscar el nodo a eliminar
+        Nodo antecesor = null;
+        Nodo aux = raiz;
+        while(aux != null){
+            if (dato.esIgual(aux.getValor())){
+                break;
+            }
+            antecesor = aux;
+            if(dato.esMenor(aux.getValor()))
+               aux = aux.getIzquierdo();
+            else
+               aux = aux.getDerecho();
+        }
+        if (aux ==null)
+           return false; // dato no encontrado
+        /* si llega a este punto, el nodo a eliminar existe y es
+           aux y su antecesor es antecesor
+         * Examinar cada caso
+         * 1. si tiene menos de dos hijos, incluso una hoja
+         *    reajustar los enlaces de su antecesor
+         */
+        if(aux.getIzquierdo()==null)
+           if(aux.getValor().esMenor(antecesor.getValor()))
+              antecesor.setIzquierdo(aux.getDerecho());
+           else
+              antecesor.setDerecho(aux.getDerecho());
+        else if(aux.getDerecho()==null)
+           if (aux.getValor().esMenor(antecesor.getValor()))
+              antecesor.setIzquierdo(aux.getIzquierdo());
+           else
+              antecesor.setDerecho(aux.getIzquierdo());
+        else 
+           //El nodo a eliminar tiene ramas izquierda y derecha
+           reemplazarPorMayorIzquierdo(aux);
+        aux = null;
+        return true;
+    }
+    private void reemplazarPorMayorIzquierdo(Nodo act){
+        Nodo mayor = act;
+        Nodo ant = act;
+        mayor = act.getIzquierdo();
+        //Buscar el mayor de la rama izquierda
+        //ant es el antecesor de mayor
+        while(mayor.getDerecho() != null){
+            ant = mayor;
+            mayor = mayor.getDerecho();
+        }
+        act.setValor(mayor.getValor()); //reemplazo
+        //reajuste
+        if(ant == act){
+           ant.setIzquierdo(mayor.getIzquierdo());
+        }
+        else {
+           ant.setDerecho(mayor.getDerecho());
+        }
+
+    }
     public Nodo getRaiz() {
         return raiz;
     }

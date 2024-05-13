@@ -29,6 +29,8 @@ public class AppArbolBinarioBusqueda{
                     break;
 
                 case 2:
+                   eliminarNodos();
+                   break;
                 case 3:
                 case 0:
                     System.out.println("Hasta luego");
@@ -40,6 +42,7 @@ public class AppArbolBinarioBusqueda{
         } while (opc != 0);
     }
     public static void insertarNodo(){
+        System.out.println("**** INSERTAR NODOS ****");
         ArbolBinario arbol = new ArbolBinario();
         try{
            
@@ -50,6 +53,7 @@ public class AppArbolBinarioBusqueda{
             arbol.insertar(new Entero(5));
             arbol.insertar(new Entero(2));
             arbol.insertar(new Entero(1));
+            arbol.insertar(new Entero(40));
             
             
 
@@ -68,4 +72,40 @@ public class AppArbolBinarioBusqueda{
         BTreePrinter.printNode(arbol.getRaiz());
 
     }
+    public static void eliminarNodos(){
+        System.out.println("**** ELIMINAR NODOS ****");
+        ArbolBinario arbol = new ArbolBinario();
+        try{
+            arbol.insertar(new Entero(10));
+            arbol.insertar(new Entero(15));
+            arbol.insertar(new Entero(30));
+            arbol.insertar(new Entero(5));
+            arbol.insertar(new Entero(2));
+            arbol.insertar(new Entero(1));
+            arbol.insertar(new Entero(40));
+            System.out.println("Elimina un Nodo que solamente tiene un hijo");
+            System.out.println("Eliminar 2");
+            
+            
+            
+
+        }catch (Exception e){
+            System.out.println("Erro: "+e.getMessage()+" "+e.getStackTrace()+e.getLocalizedMessage());
+        }
+        System.out.println("RECORRIDO DE ARBOLES:");
+        System.out.println("\n Recorrido Inorden");
+        arbol.inorden();
+        System.out.println("\n Recorrido Preorden");
+        arbol.preorden();
+        System.out.println("\n Recorrido Postorden");
+        arbol.postorden();
+        //Imprime el arbol depues de la inserción
+        System.out.println("\n IMPRESION DEL ARBOL:");
+        BTreePrinter.printNode(arbol.getRaiz());
+
+
+    }
+
+
+    
 }
