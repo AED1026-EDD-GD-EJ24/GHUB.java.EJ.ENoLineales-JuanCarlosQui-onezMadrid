@@ -106,6 +106,26 @@ public class AppArbolBinarioBusqueda{
 
     }
 
+    public Nodo buscar(Object valor){
+        Comparable dato = (Comparable) valor;
+        if(raiz == null){
+            return null;
+        }else{
+            //aux; auxiliar que va a recorriendo los nodos, desde la raiz
+            Nodo aux = raiz;
+            while(aux != null){
+                if(dato.esIgual(aux.valor)){
+                    return aux;
+                if dato.esMenor(aux.valor){
+                    aux = aux.getIzquierdo();
+                }else{
+                    aux = aux.getDerecho();
+                }
+                return null;
+        }
+
+
+    }
 
     
 }
