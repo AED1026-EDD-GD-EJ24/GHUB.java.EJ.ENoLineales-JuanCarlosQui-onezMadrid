@@ -38,7 +38,4 @@ public class Entero implements Comparable{
         Entero obj = (Entero)q;
         return (this.dato<obj.getDato());
     }
-    
-    
-    
 }

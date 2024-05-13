@@ -1,6 +1,4 @@
 package arbolBinarioOrdenado;
-
-public package arbolBinarioOrdenado;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -93,6 +91,4 @@ public class BTreePrinter {
 		return true;
 	}
 
-} {
-    
 }

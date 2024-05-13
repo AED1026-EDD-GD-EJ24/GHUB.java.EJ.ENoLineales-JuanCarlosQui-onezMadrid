@@ -1,22 +1,11 @@
 package arbolBinarioOrdenado;
-import colas.Cola;
 import pilas.Pila;
+import colas.Cola;
 
 public class ArbolBinario{
     private Nodo raiz;
-    public ArbolBinario(){
-        this.raiz = null;
-    }
-    public ArbolBinario(Nodo raiz){
-        this.raiz = raiz;
     
-    }
-    public Nodo getRaiz(){
-        return this.raiz;
-    }
-    public void setRaiz(Nodo raiz){
-        this.raiz = raiz;
-    }
+    
     
     private void visitar(Nodo aux){
         System.out.print(aux.getValor()+" ");
@@ -65,133 +54,165 @@ public class ArbolBinario{
     public void preordenIterativo(){
         Pila<Nodo> pila = new Pila<Nodo>();
         pila.apilar(raiz);
-        while(!pila.estaVacia()){
+        while (!pila.esVacia()){
             Nodo aux = pila.cima();
             visitar(aux);
             pila.retirar();
-            if(aux.getDerecho() != null){
-                pila.apilar(aux.getDerecho());
-            }
-            if(aux.getIzquierdo() != null){
-                pila.apilar(aux.getIzquierdo());
-            }    
-
+            if(aux.getDerecho() !=null)
+               pila.apilar(aux.getDerecho());
+            if(aux.getIzquierdo() !=null)
+               pila.apilar(aux.getIzquierdo());
         }
-            
     }
-    //Recorrido Iterativo en InOrden, utilizando una pila
+
+    //Recorrido  Iterativo en InOrden, utilizando una pila
     public void inordenIterativo(){
         Pila<Nodo> pila = new Pila<Nodo>();
         pila.apilar(raiz);
         Nodo aux = raiz.getIzquierdo();
-        while(aux != null || !pila.estaVacia()){
-            if(aux != null){
+        while(aux != null || !pila.esVacia()){
+            if(aux !=null){
                 pila.apilar(aux);
                 aux = aux.getIzquierdo();
             }else{
                 aux = pila.cima();
+                pila.retirar();
                 visitar(aux);
                 aux = aux.getDerecho();
-
             }
         }
+
     }
-    //Recorrido Iterativo en PostOrden, utilizando dos pilas
+
+    //Recorrido Iterativo en PostOrden, utilizando una pila
     public void postordenIterativo(){
         Pila<Nodo> pila = new Pila<Nodo>();
         Nodo aux = raiz;
         Nodo q = raiz;
-        while(aux != null){
+        while(aux !=null){
             //avanza por la izquierda y apila los nodos
-            while(aux.getIzquierdo() != null){
+            while(aux.getIzquierdo() !=null){
                 pila.apilar(aux);
                 aux = aux.getIzquierdo();
             }
-            while(aux != null && (aux.getDerecho() == null || aux.getDerecho() == q)){
+            while (aux !=null && (aux.getDerecho() == null || aux.getDerecho() == q)){
                 visitar(aux);
                 q = aux;
-                if(pila.estaVacia()){
-                    return;
-                }
+                if (pila.esVacia())
+                  return;
+
                 aux = pila.cima();
                 pila.retirar();
             }
             pila.apilar(aux);
             aux = aux.getDerecho();
-
         }
-
     }
     public void recorridoPorNivel(){
         Cola<Nodo> cola = new Cola<Nodo>();
         cola.encolar(raiz);
-        while(!cola.estaVacia()){
+        while(!cola.esVacia()){
             Nodo aux = cola.frente();
             visitar(aux);
             
-            if(aux.getIzquierdo() != null){
-                cola.encolar(aux.getIzquierdo());
-            }
+            if(aux.getIzquierdo()!=null)
+               cola.encolar(aux.getIzquierdo());
+            if(aux.getDerecho() !=null)
+               cola.encolar(aux.getDerecho());
             cola.desencolar();
-        }
-        
 
+        }
 
     }
-    // insercion de un nodo
-    private void insertar(Object valor) throws Exception{
+
+    //Insercion de nodo, version iterativa
+
+    public void insertar(Object valor) throws Exception{
         Comparable dato = (Comparable)valor;
-        Nodo nuevo = new Nodo(dato);
+        Nodo nuevo = new Nodo();
+        nuevo.setValor(dato);
 
         if(raiz == null){
-            raiz = nuevo;
-        }else{
-            //hace una referencia al padre de auxiliar
+           raiz = nuevo;
+           System.out.println("izquierdo "+raiz.getIzquierdo());
+           System.out.println("derecho "+raiz.getDerecho());
+        }
+
+        else{
+            //anterior hace una referencia al padre de aux
             Nodo anterior = null;
-            //Es un auxiliar que va recorriendo el nodo desde la raiz
+
+            // aux es un auxiliar que va recorriendo los nodos, desde la raiz
             Nodo aux = raiz;
-            while(aux != null){
+            System.out.println("aqui empieza la raiz"+aux.getValor());
+            System.out.println("izquierda "+aux.getIzquierdo());
+            System.out.println("derecha"+aux.getDerecho());
+            
+            while(aux !=null){
                 anterior = aux;
-                if(dato.esMenor(aux.getValor()))){
-                    aux = aux.getIzquierdo();
-                }
-                if(dato.esMayor(aux.getValor())){
+                if(dato.esMenor(aux.getValor()))
+                      aux = aux.getIzquierdo(); 
+                  
+                else if(dato.esMayor(aux.getValor()))
                     aux = aux.getDerecho();
-                }else{
-                    throw new Exception("Dato duplicado");
-                }
+                else 
+                   throw new Exception("Dato Duplicado");
+                    
             }
-            if(dato.esMenor (anterior.getValor())){
-                anterior.setIzquierdo(nuevo);
-            }else{
-                anterior.setDerecho(nuevo);
-            }
-
-
+            if(dato.esMenor(anterior.getValor()))
+               anterior.setIzquierdo(nuevo);
+            else
+               anterior.setDerecho(nuevo);
 
         }
+
     }
-    //Version recursiva de insertear
+
+    //Version recursiva de insertar
     public void insertar2(Object valor) throws Exception{
         Comparable dato = (Comparable)valor;
-        raiz = insertaRec(raiz, dato);
+        raiz = insertarRec(raiz, dato);
     }
-    private Nodo insertaRec(Nodo raizSub, Comparable dato) throws Exception{
-        if(raizSub == null){
-            //caso base, ternima la recursividad
-            raizSub = new Nodo(dato);
-        }else{
-            if(dato.esMenor(raizSub.getValor())){
-                raizSub.setIzquierdo(insertaRec(raizSub.getIzquierdo(), dato));
-                raizSub = setIzquierdo(iz);
+
+    private Nodo insertarRec(Nodo raizSub, Comparable dato) throws Exception{
+        if(raizSub == null)
+           //caso base, termina la recursividad
+           raizSub = new Nodo(dato);
+        else{
+            if (dato.esMenor(raizSub.getValor())){
+                Nodo iz = insertarRec(raizSub.getIzquierdo(), dato);
+                raizSub.setIzquierdo(iz);
+
             }else{
                 if(dato.esMayor(raizSub.getValor())){
-                    Nodo 
-
+                    Nodo dr = insertarRec(raizSub.getDerecho(),dato);
+                    raizSub.setDerecho(dr);
+                }
+                else{
+                     
+                   throw new Exception("Nodo duplicado");
+                }
+            }
         }
-    
-    
+        return raizSub;
     }
-        
+    public Nodo getRaiz() {
+        return raiz;
+    }
+    public void setRaiz(Nodo raiz) {
+        this.raiz = raiz;
+    }
+    public ArbolBinario(Nodo raiz) {
+        this.raiz = raiz;
+    }
+    public ArbolBinario() {
+        raiz =null;
+    }
+    
+    
+    
 
+    
+
+    
 }

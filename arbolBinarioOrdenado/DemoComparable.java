@@ -10,8 +10,5 @@ public class DemoComparable {
             System.out.println(p1.getNombre()+"NO es menor que "+p2.getNombre());
         }
 
-
-
-
     }
 }

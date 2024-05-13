@@ -1,7 +1,5 @@
 package interfase;
 
-
-
 public class Util {
     public static <T> void ordenar(T[] arr, Criterio<T> cr){
         boolean ordenado = false;
