@@ -1,6 +1,6 @@
 package arbolBinario;
-import colas.Cola;
 import pilas.Pila;
+import colas.Cola;
 
 public class ArbolBinario{
     private Nodo raiz;
@@ -65,77 +65,78 @@ public class ArbolBinario{
     public void preordenIterativo(){
         Pila<Nodo> pila = new Pila<Nodo>();
         pila.apilar(raiz);
-        while(!pila.estaVacia()){
+        while (!pila.esVacia()){
             Nodo aux = pila.cima();
             visitar(aux);
             pila.retirar();
-            if(aux.getDerecho() != null){
-                pila.apilar(aux.getDerecho());
-            }
-            if(aux.getIzquierdo() != null){
-                pila.apilar(aux.getIzquierdo());
-            }    
-
+            if(aux.getDerecho() !=null)
+               pila.apilar(aux.getDerecho());
+            if(aux.getIzquierdo() !=null)
+               pila.apilar(aux.getIzquierdo());
         }
-            
     }
-    //Recorrido Iterativo en InOrden, utilizando una pila
+
+    //Recorrido  Iterativo en InOrden, utilizando una pila
     public void inordenIterativo(){
         Pila<Nodo> pila = new Pila<Nodo>();
         pila.apilar(raiz);
         Nodo aux = raiz.getIzquierdo();
-        while(aux != null || !pila.estaVacia()){
-            if(aux != null){
+        while(aux != null || !pila.esVacia()){
+            if(aux !=null){
                 pila.apilar(aux);
                 aux = aux.getIzquierdo();
             }else{
                 aux = pila.cima();
+                pila.retirar();
                 visitar(aux);
                 aux = aux.getDerecho();
-
             }
         }
+
     }
-    //Recorrido Iterativo en PostOrden, utilizando dos pilas
+
+    //Recorrido Iterativo en PostOrden, utilizando una pila
     public void postordenIterativo(){
         Pila<Nodo> pila = new Pila<Nodo>();
         Nodo aux = raiz;
         Nodo q = raiz;
-        while(aux != null){
+        while(aux !=null){
             //avanza por la izquierda y apila los nodos
-            while(aux.getIzquierdo() != null){
+            while(aux.getIzquierdo() !=null){
                 pila.apilar(aux);
                 aux = aux.getIzquierdo();
             }
-            while(aux != null && (aux.getDerecho() == null || aux.getDerecho() == q)){
+            while (aux !=null && (aux.getDerecho() == null || aux.getDerecho() == q)){
                 visitar(aux);
                 q = aux;
-                if(pila.estaVacia()){
-                    return;
-                }
+                if (pila.esVacia())
+                  return;
+
                 aux = pila.cima();
                 pila.retirar();
             }
             pila.apilar(aux);
             aux = aux.getDerecho();
-
         }
-
     }
     public void recorridoPorNivel(){
         Cola<Nodo> cola = new Cola<Nodo>();
         cola.encolar(raiz);
-        while(!cola.estaVacia()){
+        while(!cola.esVacia()){
             Nodo aux = cola.frente();
             visitar(aux);
             
-            if(aux.getIzquierdo() != null){
-                cola.encolar(aux.getIzquierdo());
-            }
+            if(aux.getIzquierdo()!=null)
+               cola.encolar(aux.getIzquierdo());
+            if(aux.getDerecho() !=null)
+               cola.encolar(aux.getDerecho());
             cola.desencolar();
-        }
 
+        }
 
     }
 
+    
+
+    
 }

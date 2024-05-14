@@ -248,13 +248,30 @@ public class ArbolBinario{
         }
         act.setValor(mayor.getValor()); //reemplazo
         //reajuste
-        if(ant == act){
+        if(ant == act)
            ant.setIzquierdo(mayor.getIzquierdo());
-        }
-        else {
+        else 
            ant.setDerecho(mayor.getDerecho());
-        }
 
+    }
+
+    public Nodo buscar(Object valor){
+        Comparable dato = (Comparable) valor;
+        if (raiz == null)
+           return raiz;
+        else{
+            //aux: auxiliar que va recorriendo los nodos, desde la raiz
+            Nodo aux = raiz;
+            while(aux != null){
+                if(dato.esIgual(aux.getValor()))
+                   return aux;
+                if(dato.esMenor(aux.getValor()))
+                   aux = aux.getIzquierdo();
+                else
+                   aux = aux.getDerecho();
+            }
+            return null;
+        }
     }
     public Nodo getRaiz() {
         return raiz;
@@ -268,11 +285,5 @@ public class ArbolBinario{
     public ArbolBinario() {
         raiz =null;
     }
-    
-    
-    
-
-    
-
     
 }
