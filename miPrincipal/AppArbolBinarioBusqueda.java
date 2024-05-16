@@ -162,26 +162,21 @@ public class AppArbolBinarioBusqueda{
             arbol.insertar(new Entero(5));
             arbol.insertar(new Entero(2));
             arbol.insertar(new Entero(1));
-            public Nodo buscar(Entero dato) {
-                if (raiz == null) {
-                    return null;
-                } else {
-                    return buscarRecursivo(raiz, dato);
-                }
-            }
-            
-
-            private Nodo buscarRecursivo(Nodo nodo, Entero dato) {
-                if (nodo == null || nodo.getDato().equals(dato)) {
-                    return nodo;
-                }
-
-                if (dato.compareTo(nodo.getDato()) < 0) {
-                    return buscarRecursivo(nodo.getIzquierdo(), dato);
-                } else {
-                    return buscarRecursivo(nodo.getDerecho(), dato);
-                }
-            }
+            arbol.insertar(new Entero(40));
+            System.out.println("RECORRIDO DE ARBOLES:");
+            System.out.println("\n Recorrido Inorden");
+            arbol.inorden();
+            System.out.println("\n Recorrido Preorden");
+            arbol.preorden();
+            System.out.println("\n Recorrido Postorden");
+            arbol.postorden();
+            //Imprime el arbol depues de la inserción
+            System.out.println("\n IMPRESION DEL ARBOL:");
+            BTreePrinter.printNode(arbol.getRaiz());
+            System.out.println("busco el dato 5");
+            System.out.println("Elemento buscado 5 "+arbol.buscar(new Entero(5)).getValor());
+            System.out.println("Busco un elemento que no existe 50");
+            System.out.println("Elemento buscado 50 "+arbol.buscar(new Entero(50)));
 
             
             

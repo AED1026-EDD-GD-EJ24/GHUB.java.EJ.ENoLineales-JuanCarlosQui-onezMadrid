@@ -1,5 +1,6 @@
 ./pilas/Nodo.java
 ./pilas/Pila.java
+./demoClaseTree/demoClaseTree.java
 ./miTest/AppTest.java
 ./colas/Nodo.java
 ./colas/Cola.java
@@ -18,6 +19,11 @@
 ./interfase/Persona.java
 ./interfase/Util.java
 ./interfase/CriterioPersonaId.java
+./arbolAVL/Nodo.java
+./arbolAVL/Logical.java
+./arbolAVL/ArbolAVL.java
+./arbolAVL/Entero.java
+./arbolAVL/Comparable.java
 ./arbolBinario/Nodo.java
 ./arbolBinario/ArbolBinario.java
 ./miPrincipal/AppArbolBinarioBusqueda.java
