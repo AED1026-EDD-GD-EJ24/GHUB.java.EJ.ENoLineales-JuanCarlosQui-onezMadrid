@@ -2,9 +2,11 @@ package miPrincipal;
 
 import java.util.Scanner;
 import arbolBinarioOrdenado.ArbolBinario;
+
 import arbolBinarioOrdenado.Entero;
+
+
 import arbolBinarioOrdenado.BTreePrinter;
-import arbolBinarioOrdenado.Persona;
 
 public class AppArbolBinarioBusqueda{
     public static void menu(){
@@ -74,6 +76,7 @@ public class AppArbolBinarioBusqueda{
         //Imprime el arbol depues de la inserción
         System.out.println("\n IMPRESION DEL ARBOL:");
         BTreePrinter.printNode(arbol.getRaiz());
+       
 
     }
     public static void eliminarNodos(){
@@ -178,8 +181,6 @@ public class AppArbolBinarioBusqueda{
             System.out.println("Busco un elemento que no existe 50");
             System.out.println("Elemento buscado 50 "+arbol.buscar(new Entero(50)));
 
-            
-            
 
         }catch (Exception e){
             System.out.println("Erro: "+e.getMessage()+" "+e.getStackTrace()+e.getLocalizedMessage());
